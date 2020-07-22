@@ -1,0 +1,30 @@
+{
+  "displayName": "Homebridge SMTP Motion",
+  "name": "homebridge-smtp-motion",
+  "version": "1.0.0",
+  "description": "Converts SMTP messages into HTTP motion alerts that homebridge-camera-ffmpeg understands",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Sunoo/homebridge-smtp-motion.git"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "motion",
+    "smtp",
+    "email",
+    "camera"
+  ],
+  "author": "David Maher",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Sunoo/homebridge-smtp-motion/issues"
+  },
+  "homepage": "https://github.com/Sunoo/homebridge-smtp-motion#readme",
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=1.0.0"
+  },
+  "dependencies": {
+    "smtp-server": ">=3.7.0"
+  }
+}
