@@ -43,8 +43,15 @@
     "rimraf": "^3.0.2",
     "typescript": "^3.9.7"
   },
+  "files": [
+    "config.schema.json",
+    "dist/**/*",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "engines": {
-    "node": ">=0.12.0",
+    "node": ">=10",
     "homebridge": ">=1.0.0"
   },
   "dependencies": {

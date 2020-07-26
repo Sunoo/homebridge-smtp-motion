@@ -8,18 +8,18 @@ import {
 } from 'homebridge';
 import { SMTPServer, SMTPServerDataStream, SMTPServerSession } from 'smtp-server';
 import http from 'http';
+import { SmtpMotionPlatformConfig } from './configTypes';
 
 const PLUGIN_NAME = 'homebridge-smtp-motion';
 const PLATFORM_NAME = 'smtpMotion';
 
 class SmtpMotionPlatform implements DynamicPlatformPlugin {
   private readonly log: Logging;
-  private readonly config: PlatformConfig;
-  private readonly cameraConfigs: Array<any> = [];
+  private readonly config: SmtpMotionPlatformConfig;
 
   constructor(log: Logging, config: PlatformConfig, api: API) {
     this.log = log;
-    this.config = config;
+    this.config = config as unknown as SmtpMotionPlatformConfig;
 
     api.on(APIEvent.DID_FINISH_LAUNCHING, this.startSmtp.bind(this));
   }
