@@ -6,8 +6,10 @@ import {
   PlatformAccessory,
   PlatformConfig
 } from 'homebridge';
-import { SMTPServer, SMTPServerDataStream, SMTPServerSession } from 'smtp-server';
+import Bunyan from 'bunyan';
 import http from 'http';
+import { SMTPServer } from 'smtp-server';
+import Stream from 'stream';
 import { SmtpMotionPlatformConfig } from './configTypes';
 
 const PLUGIN_NAME = 'homebridge-smtp-motion';
@@ -32,17 +34,35 @@ class SmtpMotionPlatform implements DynamicPlatformPlugin {
     const smtpPort = this.config.smtp_port || 2525;
     const httpPort = this.config.http_port || 8080;
     const log = this.log;
+    const logStream = new Stream.Writable({
+      write: (chunk: string, encoding: BufferEncoding, callback): void => {
+        const data = JSON.parse(chunk);
+        this.log.debug('[SMTP Server] ' + data.msg);
+        callback();
+      }
+    });
+    const bunyanLog = Bunyan.createLogger({
+      name: 'ftp',
+      streams: [{
+        stream: logStream
+      }]
+    });
     const server = new SMTPServer({authOptional: true,
-      onData(stream: SMTPServerDataStream, session: SMTPServerSession, callback: (err?: Error | null) => void): void {
+      disabledCommands: ['STARTTLS'],
+      logger: bunyanLog,
+      onAuth(auth, session, callback): void {
+        callback(null, { user: true });
+      },
+      onData(stream, session, callback): void {
         stream.on('data', () => {}); // eslint-disable-line @typescript-eslint/no-empty-function
         stream.on('end', callback);
         session.envelope.rcptTo.forEach((rcptTo) => {
           const name = rcptTo.address.split('@')[0].replace(/\+/g, ' ');
-          log.debug(name + ' Motion Detected!');
+          log('[' + name + '] Email received.');
           try {
             http.get('http://127.0.0.1:' + httpPort + '/motion?' + name);
           } catch (ex) {
-            log.error(name + ': Error making HTTP call: ' + ex);
+            log.error('[' + name + '] Error making HTTP call: ' + ex);
           }
         });
       }
