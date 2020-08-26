@@ -1,6 +1,6 @@
 # homebridge-smtp-motion
 
-[![npm](https://img.shields.io/npm/v/homebridge-smtp-motion) ![npm](https://img.shields.io/npm/dt/homebridge-smtp-motion)](https://www.npmjs.com/package/homebridge-smtp-motion)
+[![npm](https://img.shields.io/npm/v/homebridge-smtp-motion) ![npm](https://img.shields.io/npm/dt/homebridge-smtp-motion)](https://www.npmjs.com/package/homebridge-smtp-motion) [![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)
 
 This plugin converts SMTP messages into HTTP motion alerts [homebridge-camera-ffmpeg](https://github.com/homebridge-plugins/homebridge-camera-ffmpeg) understands.
 
