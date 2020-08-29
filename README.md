@@ -29,11 +29,10 @@ Edit your `config.json` accordingly. Configuration sample:
 ]
 ```
 
-| Fields               | Description                                                                             | Required |
-|----------------------|-----------------------------------------------------------------------------------------|----------|
-| platform             | Must always be `smtpMotion`.                                                            | Yes      |
-| smtp_port            | The port to run the SMTP server on. (Default: 5000)                                     | No       |
-| http_port            | The HTTP port used by homebridge-camera-ffmpeg. (Default: 8080)                         | No       |
+- platform: _(Required)_ Must always be `smtpMotion`.
+- smtp_port: The port to run the SMTP server on. (Default: `5000`)
+- http_port: The HTTP port used by homebridge-camera-ffmpeg. (Default: `8080`)
+- space_replace: The character to replace a space with in the camera name portion of the email address. (Default: `+`)
 
 ### Camera Configuration
 

@@ -1,7 +1,7 @@
 {
   "displayName": "Homebridge SMTP Motion",
   "name": "homebridge-smtp-motion",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Converts SMTP messages into HTTP motion alerts that homebridge-camera-ffmpeg understands",
   "main": "dist/index.js",
   "repository": {
@@ -54,6 +54,7 @@
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "@typescript-eslint/parser": "^3.7.0",
     "@types/bunyan": "^1.8.6",
+    "@types/lodash.escaperegexp": "^4.1.6",
     "@types/node": "14.6.1",
     "@types/smtp-server": "3.5.4",
     "eslint": "^7.5.0",
@@ -75,6 +76,7 @@
   },
   "dependencies": {
     "bunyan": ">=1.8.14",
+    "lodash.escaperegexp": "^4.1.2",
     "smtp-server": ">=3.7.0"
   }
 }

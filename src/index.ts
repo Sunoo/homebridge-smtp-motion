@@ -8,6 +8,7 @@ import {
 } from 'homebridge';
 import Bunyan from 'bunyan';
 import http from 'http';
+import EscapeRegExp from 'lodash.escaperegexp';
 import { SMTPServer } from 'smtp-server';
 import Stream from 'stream';
 import { SmtpMotionPlatformConfig } from './configTypes';
@@ -33,6 +34,7 @@ class SmtpMotionPlatform implements DynamicPlatformPlugin {
   startSmtp(): void {
     const smtpPort = this.config.smtp_port || 2525;
     const httpPort = this.config.http_port || 8080;
+    const regex = new RegExp(EscapeRegExp(this.config.space_replace || '+'), 'g');
     const log = this.log;
     const logStream = new Stream.Writable({
       write: (chunk: string, encoding: BufferEncoding, callback): void => {
@@ -42,7 +44,7 @@ class SmtpMotionPlatform implements DynamicPlatformPlugin {
       }
     });
     const bunyanLog = Bunyan.createLogger({
-      name: 'ftp',
+      name: 'smtp',
       streams: [{
         stream: logStream
       }]
@@ -57,7 +59,7 @@ class SmtpMotionPlatform implements DynamicPlatformPlugin {
         stream.on('data', () => {}); // eslint-disable-line @typescript-eslint/no-empty-function
         stream.on('end', callback);
         session.envelope.rcptTo.forEach((rcptTo) => {
-          const name = rcptTo.address.split('@')[0].replace(/\+/g, ' ');
+          const name = rcptTo.address.split('@')[0].replace(regex, ' ');
           log('[' + name + '] Email received.');
           try {
             http.get('http://127.0.0.1:' + httpPort + '/motion?' + name);
