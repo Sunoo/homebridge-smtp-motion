@@ -51,7 +51,7 @@
     "watch": "npm run clean && tsc --watch"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^3.7.0",
     "@types/bunyan": "^1.8.6",
     "@types/lodash.escaperegexp": "^4.1.6",
