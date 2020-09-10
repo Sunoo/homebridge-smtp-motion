@@ -23,14 +23,14 @@ Edit your `config.json` accordingly. Configuration sample:
 "platforms": [
     {
         "platform": "smtpMotion",
-        "smtp_port": "2525",
+        "smtp_port": 2525,
         "http_port": 8080
     }
 ]
 ```
 
 - platform: _(Required)_ Must always be `smtpMotion`.
-- smtp_port: The port to run the SMTP server on. (Default: `5000`)
+- smtp_port: The port to run the SMTP server on. (Default: `2525`)
 - http_port: The HTTP port used by homebridge-camera-ffmpeg. (Default: `8080`)
 - space_replace: The character to replace a space with in the camera name portion of the email address. (Default: `+`)
 
@@ -43,3 +43,11 @@ To use this plugin, you'll need to configure the SMTP settings on your camera as
 - `Username` and `Password`: Any value can currently be used, as authentication is not currently supported in this plugin. That will likely be added in future versions.
 - `From Address`: Any value can be used, this is not checked.
 - `To Address`: This needs to be your camera's name, exactly as configured in homebridge-camera-ffmpeg but with + instead of space, followed by an @ and any domain you want. Example: `Camera+Name@example.com`
+
+### Running on Port 25 on Linux
+
+If you have a camera that refuses to connect to an SMTP server on a port other than 25, it is still possible to use this plugin:
+
+- Grant Node permissions to use low ports: `sudo setcap 'cap_net_bind_service=+ep' /usr/bin/node`
+- Set `smtp_port` to `25`.
+- Restart Homebridge.
