@@ -55,7 +55,7 @@
     "@typescript-eslint/parser": "^3.7.0",
     "@types/bunyan": "^1.8.6",
     "@types/lodash.escaperegexp": "^4.1.6",
-    "@types/node": "14.14.11",
+    "@types/node": "14.14.12",
     "@types/smtp-server": "3.5.5",
     "eslint": "^7.5.0",
     "homebridge": "^1.1.1",
