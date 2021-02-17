@@ -6,8 +6,6 @@ This plugin converts SMTP messages into HTTP motion alerts [homebridge-camera-ff
 
 Note that this plugin itself does not expose any devices to HomeKit.
 
-This is in an extremely early state, and currently only triggers alerts after uploading an image into the folder with the same name as your camera. The image is not currently stored anywhere.
-
 ## Installation
 
 1. Install Homebridge using the [official instructions](https://github.com/homebridge/homebridge/wiki).
@@ -23,16 +21,15 @@ Edit your `config.json` accordingly. Configuration sample:
 "platforms": [
     {
         "platform": "smtpMotion",
-        "smtp_port": 2525,
-        "http_port": 8080
+        "smtp_port": 2525
     }
 ]
 ```
 
 - platform: _(Required)_ Must always be `smtpMotion`.
 - smtp_port: The port to run the SMTP server on. (Default: `2525`)
-- http_port: The HTTP port used by homebridge-camera-ffmpeg. (Default: `8080`)
 - space_replace: The character to replace a space with in the camera name portion of the email address. (Default: `+`)
+- log_emails: Write to the Homebridge log when an email is received. (Default: `false`)
 
 ### Camera Configuration
 

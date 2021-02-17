@@ -1,6 +1,9 @@
+import { PlatformIdentifier, PlatformName } from 'homebridge';
+
 export type SmtpMotionPlatformConfig = {
-  name: string;
-  smtp_port: number;
-  http_port: number;
-  space_replace: string;
+  platform: PlatformName | PlatformIdentifier;
+  name?: string;
+  smtp_port?: number;
+  space_replace?: string;
+  log_emails?: boolean;
 };
