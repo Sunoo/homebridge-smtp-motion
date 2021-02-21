@@ -19,6 +19,11 @@
                 "placeholder": 2525,
                 "description": "The port to run the SMTP server on."
             },
+            "override_http": {
+                "title": "Override HTTP Port",
+                "type": "integer",
+                "description": "If you need to override the HTTP port, or are not running homebridge-camera-ffmpeg."
+            },
             "space_replace": {
                 "title": "Space Replace",
                 "type": "string",

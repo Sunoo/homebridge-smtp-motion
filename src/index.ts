@@ -31,17 +31,21 @@ class SmtpMotionPlatform implements DynamicPlatformPlugin {
     this.api = api;
     this.config = config as SmtpMotionPlatformConfig;
 
-    const fullConfig = JSON.parse(readFileSync(this.api.user.configPath(), 'utf8')) as HomebridgeConfig;
-    const ffmpegConfig = fullConfig.platforms.find((config: { platform: string }) => config.platform === 'Camera-ffmpeg') as FfmpegPlatformConfig;
-    if (!ffmpegConfig) {
-      this.log.error('The homebridge-camera-ffmpeg plugin must be installed and configured.');
-      return;
-    } else {
-      this.porthttp = ffmpegConfig?.porthttp;
-      if (!this.porthttp) {
-        this.log.error('You must have "porthttp" configured in the homebridge-camera-ffmpeg plugin.');
+    if (!this.config.override_http) {
+      const fullConfig = JSON.parse(readFileSync(this.api.user.configPath(), 'utf8')) as HomebridgeConfig;
+      const ffmpegConfig = fullConfig.platforms.find((config: { platform: string }) => config.platform === 'Camera-ffmpeg') as FfmpegPlatformConfig;
+      if (!ffmpegConfig) {
+        this.log.error('The homebridge-camera-ffmpeg plugin must be installed and configured.');
         return;
+      } else {
+        this.porthttp = ffmpegConfig?.porthttp;
+        if (!this.porthttp) {
+          this.log.error('You must have "porthttp" configured in the homebridge-camera-ffmpeg plugin.');
+          return;
+        }
       }
+    } else {
+      this.porthttp = this.config.override_http;
     }
 
     api.on(APIEvent.DID_FINISH_LAUNCHING, this.startSmtp.bind(this));

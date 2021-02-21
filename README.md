@@ -26,10 +26,11 @@ Edit your `config.json` accordingly. Configuration sample:
 ]
 ```
 
-- platform: _(Required)_ Must always be `smtpMotion`.
-- smtp_port: The port to run the SMTP server on. (Default: `2525`)
-- space_replace: The character to replace a space with in the camera name portion of the email address. (Default: `+`)
-- log_emails: Write to the Homebridge log when an email is received. (Default: `false`)
+- `platform`: _(Required)_ Must always be `smtpMotion`.
+- `smtp_port`: The port to run the SMTP server on. (Default: `2525`)
+- `override_http`: If you need to override the HTTP port, or are not running homebridge-camera-ffmpeg.
+- `space_replace`: The character to replace a space with in the camera name portion of the email address. (Default: `+`)
+- `log_emails`: Write to the Homebridge log when an email is received. (Default: `false`)
 
 ### Camera Configuration
 
