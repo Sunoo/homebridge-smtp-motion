@@ -86,7 +86,7 @@ class SmtpMotionPlatform implements DynamicPlatformPlugin {
           const name = rcptTo.address.split('@')[0].replace(regex, ' ');
           log.debug('Email received.', name, logEmails);
           try {
-            http.get('http://127.0.0.1:' + httpPort + '/motion?' + name);
+            http.get('http://localhost:' + httpPort + '/motion?' + name);
           } catch (ex) {
             log.error('Error making HTTP call: ' + ex, name);
           }
